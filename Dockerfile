@@ -1,5 +1,5 @@
 # Use latest Debian as base
-FROM debian:12
+FROM debian:10
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL en_US.UTF-8
