@@ -55,11 +55,15 @@ RUN apt-get install -y \
     python2.7 \
     python3.5
 
-# Install additional tools (Composer, Node.js, Yarn, etc)
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g yarn n mocha grunt-cli webpack gulp
+# Install Node.js and npm from NodeSource PPA
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install -y nodejs
+
+# Install additional global packages
+RUN npm install -g yarn n mocha grunt-cli webpack gulp
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Specify work directory
 WORKDIR /var/www/html
